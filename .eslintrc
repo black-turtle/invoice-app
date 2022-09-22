@@ -1,0 +1,67 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "extends": [
+        "next/core-web-vitals",
+        "plugin:react-hooks/recommended",
+        // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
+        "plugin:jsx-a11y/recommended",
+        "prettier"
+    ],
+    "plugins": ["react"],
+    "rules": {
+        // "@typescript-eslint/no-unused-vars": "error",
+
+        "@next/next/no-img-element": "off",
+
+        "indent": ["warn", 4],
+
+        // https://eslint.org/docs/rules/semi
+        "semi": ["warn", "never"],
+
+        // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md
+        "react/jsx-boolean-value": ["warn", "never"],
+
+        // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-child-element-spacing.md
+        "react/jsx-child-element-spacing": ["warn"],
+
+        // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-curly-newline.md
+        "react/jsx-curly-newline": ["warn"],
+
+        // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-equals-spacing.md
+        "react/jsx-equals-spacing": [2, "never"],
+
+        "react/jsx-indent": [2, 4, { "indentLogicalExpressions": true }],
+
+        // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-max-depth.md
+        "react/jsx-max-depth": [2, { "max": 5 }],
+
+        // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-max-props-per-line.md
+        // when props don't have enough space to go on one line, we spread all props one under the other
+        "react/jsx-max-props-per-line": [
+            1,
+            { "maximum": 1, "when": "multiline" }
+        ],
+
+        // !Important for Vlad
+        // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-wrap-multilines.md
+        "react/jsx-wrap-multilines": [
+            1,
+            {
+                "declaration": "parens",
+                "assignment": "parens",
+                "return": "parens",
+                "arrow": "parens",
+                "condition": "ignore",
+                "logical": "ignore",
+                "prop": "ignore"
+            }
+        ],
+
+        // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-tag-spacing.md
+        "react/jsx-tag-spacing": [1]
+    }
+}
