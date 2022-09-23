@@ -128,7 +128,7 @@ export const useAuthStore = create<Store>()(
             logout: async () => {
                 deleteCookie(COOKIE_AUTH_TOKEN_KEY)
                 deleteCookie(COOKIE_USER_AVATAR)
-                signOut()
+                await signOut()
 
                 axiosClient.injectToken(null)
                 graphQlClient.injectToken(null)
