@@ -9,6 +9,7 @@ import { getCurrentUserInfo } from '../api/userApi'
 import {
     COOKIE_AUTH_TOKEN_KEY,
     COOKIE_USER_AVATAR,
+    COOKIE_USE_GOOGLE_AUTH,
 } from '../stores/useAuthStore'
 
 const redirectTo = (url: string) => {
@@ -107,11 +108,17 @@ export const serverSideNoAuthGuard: GetServerSideProps = async ({
         const session = await unstable_getServerSession(req, res, authOptions)
         const googleAuthToken = session && (await loginUsingGoogle(session))
         if (googleAuthToken) {
+            // await signOut()
             setCookie(COOKIE_AUTH_TOKEN_KEY, googleAuthToken, {
                 req,
                 res,
             })
             setCookie(COOKIE_USER_AVATAR, session.user?.image, {
+                req,
+                res,
+            })
+
+            setCookie(COOKIE_USE_GOOGLE_AUTH, true, {
                 req,
                 res,
             })

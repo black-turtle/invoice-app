@@ -2,10 +2,12 @@ import { Slide, SlideProps } from '@mui/material'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 import Stack from '@mui/material/Stack'
+import { deleteCookie, getCookie } from 'cookies-next'
+import { signOut } from 'next-auth/react'
 import * as React from 'react'
 import { PropsWithChildren, useEffect } from 'react'
 import useNavigate from '../hooks/useNavigate'
-import { useAuthStore } from '../stores/useAuthStore'
+import { COOKIE_USE_GOOGLE_AUTH, useAuthStore } from '../stores/useAuthStore'
 import {
     HttpStatus,
     MessageType,
@@ -46,7 +48,12 @@ export default function NotificationContainer({ children }: PropsWithChildren) {
 
             if (httpCode === HttpStatus.INVALID_TOKEN) {
                 logout().then(() => {
-                    navigateTo('/login')
+                    if (getCookie(COOKIE_USE_GOOGLE_AUTH)) {
+                        deleteCookie(COOKIE_USE_GOOGLE_AUTH)
+                        signOut({ callbackUrl: '/login' })
+                    } else {
+                        navigateTo('/login')
+                    }
                 })
             }
         }

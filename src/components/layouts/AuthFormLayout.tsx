@@ -31,10 +31,6 @@ const AuthFormLayout = (props: IProps) => {
                     <BiLock />
                 </Avatar>
 
-                <Typography variant="body1" color={grey[600]} sx={{ mt: 2 }}>
-                    Enter your credentials to continue
-                </Typography>
-
                 <Box
                     sx={{
                         display: 'flex',
@@ -55,6 +51,14 @@ const AuthFormLayout = (props: IProps) => {
                             <Chip label="OR" />
                         </Divider>
                     )}
+
+                    <Typography
+                        variant="body1"
+                        color={grey[600]}
+                        sx={{ mb: 2 }}
+                    >
+                        Enter your credentials to continue
+                    </Typography>
                     {props.children}
                 </Box>
             </Box>

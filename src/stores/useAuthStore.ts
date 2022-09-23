@@ -1,5 +1,4 @@
 import { deleteCookie, getCookie, setCookie } from 'cookies-next'
-import { signOut } from 'next-auth/react'
 import create from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
@@ -22,6 +21,7 @@ export const enum AuthState {
 
 export const COOKIE_AUTH_TOKEN_KEY = 'AUTH_TOKEN'
 export const COOKIE_USER_AVATAR = 'USER_AVATAR'
+export const COOKIE_USE_GOOGLE_AUTH = 'USE_GOOGLE_AUTH'
 
 interface StoreValues {
     authState: AuthState
@@ -128,7 +128,6 @@ export const useAuthStore = create<Store>()(
             logout: async () => {
                 deleteCookie(COOKIE_AUTH_TOKEN_KEY)
                 deleteCookie(COOKIE_USER_AVATAR)
-                await signOut()
 
                 axiosClient.injectToken(null)
                 graphQlClient.injectToken(null)

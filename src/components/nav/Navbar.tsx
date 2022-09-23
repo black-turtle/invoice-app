@@ -4,11 +4,16 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-import { getCookie } from 'cookies-next'
+import { deleteCookie, getCookie } from 'cookies-next'
+import { signOut } from 'next-auth/react'
 import dynamic from 'next/dynamic'
 import { FaBuilding, FaFileInvoiceDollar, FaSignOutAlt } from 'react-icons/fa'
 import useNavigate from '../../hooks/useNavigate'
-import { COOKIE_USER_AVATAR, useAuthStore } from '../../stores/useAuthStore'
+import {
+    COOKIE_USER_AVATAR,
+    COOKIE_USE_GOOGLE_AUTH,
+    useAuthStore,
+} from '../../stores/useAuthStore'
 import {
     HttpStatus,
     MessageType,
@@ -35,15 +40,20 @@ const DisplayAvatarOptions = () => {
             Icon: <FaSignOutAlt />,
             text: 'Logout',
             onClick: () => {
-                logout()
+                logout().then(() => {
+                    setNotificationData(
+                        MessageType.SUCCESS,
+                        'Logout Success',
+                        HttpStatus.IGNORE,
+                    )
 
-                setNotificationData(
-                    MessageType.SUCCESS,
-                    'Logout Success',
-                    HttpStatus.IGNORE,
-                )
-
-                navigateTo('/login')
+                    if (getCookie(COOKIE_USE_GOOGLE_AUTH)) {
+                        deleteCookie(COOKIE_USE_GOOGLE_AUTH)
+                        signOut({ callbackUrl: '/login' })
+                    } else {
+                        navigateTo('/login')
+                    }
+                })
             },
         },
     ]
