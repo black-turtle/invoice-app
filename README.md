@@ -2,7 +2,7 @@ Note: This is the assignment project of React accelerator program provided by To
 
 # TopInvoice Web client
 
-<h2><a href='https://google.com' target='_blank'> Demo </a></h2>
+<h2><a href='https://invoice-app-i33w-black-turtle.vercel.app' target='_blank'> Demo </a></h2>
 
 TopInvoice ia an app for managing users, clients and invoices. Main functionalities of this web app is:
 

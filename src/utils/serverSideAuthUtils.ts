@@ -90,7 +90,7 @@ const registerUsingGoogle = async (
 
 const clearGoogleAuthSessionCookies = (req: any, res: any) => {
     for (let name in req.cookies) {
-        if (name.startsWith('_ga') || name.startsWith('next-auth')) {
+        if (name.startsWith('_ga') || name.includes('next-auth')) {
             deleteCookie(name, {
                 req,
                 res,
