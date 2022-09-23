@@ -1,4 +1,5 @@
 import { deleteCookie, getCookie, setCookie } from 'cookies-next'
+import { signOut } from 'next-auth/react'
 import create from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
@@ -127,6 +128,7 @@ export const useAuthStore = create<Store>()(
             logout: async () => {
                 deleteCookie(COOKIE_AUTH_TOKEN_KEY)
                 deleteCookie(COOKIE_USER_AVATAR)
+                signOut()
 
                 axiosClient.injectToken(null)
                 graphQlClient.injectToken(null)

@@ -88,16 +88,6 @@ const registerUsingGoogle = async (
     return apiResponse
 }
 
-const clearGoogleAuthSessionCookies = (req: any, res: any) => {
-    for (let name in req.cookies) {
-        if (name.startsWith('_ga') || name.includes('next-auth')) {
-            deleteCookie(name, {
-                req,
-                res,
-            })
-        }
-    }
-}
 const isGoogleAuthRequired =
     process.env.NEXT_PUBLIC_ENABLE_GOOGLE_AUTH === 'true'
 
@@ -117,9 +107,6 @@ export const serverSideNoAuthGuard: GetServerSideProps = async ({
         const session = await unstable_getServerSession(req, res, authOptions)
         const googleAuthToken = session && (await loginUsingGoogle(session))
         if (googleAuthToken) {
-            // clear the session data and save authToken in cookie
-            clearGoogleAuthSessionCookies(req, res)
-
             setCookie(COOKIE_AUTH_TOKEN_KEY, googleAuthToken, {
                 req,
                 res,
