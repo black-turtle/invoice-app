@@ -1,4 +1,5 @@
 import { signIn } from 'next-auth/react'
+import { useLayoutEffect } from 'react'
 import { loginApi, LoginApiParams } from '../../../api/authApi'
 import GoogleAuthButton from '../../../components/GoogleAuthButton'
 import AuthFormLayout from '../../../components/layouts/AuthFormLayout'
@@ -10,6 +11,11 @@ import LoginForm from './LoginForm'
 export const LoginFormContainer = () => {
     const { router } = useNavigate()
     const login = useAuthStore((state) => state.login)
+
+    useLayoutEffect(() => {
+        // clear formNotification as we need to change page
+        useFormAlertStore.getState().reset()
+    }, [])
 
     const onSubmitHandler = async (params: LoginApiParams) => {
         return login(() => loginApi(params)).then((user) => {
