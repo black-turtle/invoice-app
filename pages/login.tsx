@@ -18,7 +18,7 @@ const DemoCredential = () => {
                 <Typography variant="body2" sx={{ color: 'gray', mb: '15px' }}>
                     Creating new user comes with empty clients and invoices
                     data. If you wish to Test with data, please use this
-                    credential
+                    credential (only demo purpose)
                 </Typography>
                 <Typography variant="subtitle1">
                     <span style={{ fontWeight: 'bold' }}>Email: </span>
