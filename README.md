@@ -1,5 +1,3 @@
-Note: This is the assignment project of React accelerator program provided by Toptal. React accelerator program is an exclusive program that provides hands on experience on React to selective toptal talents.
-
 # TopInvoice Web client
 
 <h2><a href='https://invoice-app-i33w-black-turtle.vercel.app' target='_blank'> Demo </a></h2>
